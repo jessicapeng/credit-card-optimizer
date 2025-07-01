@@ -1,8 +1,10 @@
 "use client";
+export const dynamic = "force-dynamic";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default function ResultPage() {
+function ResultContent() {
   const searchParams = useSearchParams();
   const category = searchParams.get('category');
   const amount = searchParams.get('amount');
@@ -78,5 +80,13 @@ export default function ResultPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense>
+      <ResultContent />
+    </Suspense>
   );
 } 
